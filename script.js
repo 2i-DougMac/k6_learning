@@ -1,28 +1,37 @@
-import http from 'k6/http';
-import { sleep } from 'k6';
-
-// 1. init code
+import http from 'k6/http'
+import { check, sleep } from 'k6'
+import faker from 'faker'
+faker.locale = "en"
 
 export let options = {
-    // to avoid adding params at command line invocation
-    
+  stages: [
+
+    { duration: '60m', target: 200 }
+  ],
 }
 
-export function setup() {
-    // 2. setup code
-    return { v: 1 }
-}
-
-
-export default function (data) {
-    // 3. VU code
-    console.log(JSON.stringify(data))
-}
-
-export function teardown(data) {
-    // 4. teardown code
-    if (data.v !=1) {
-        throw new Error('incorrect data: ' + JSON.stringify(data))
+export default function () {
+    let piAddress = "http://192.168.178.64:3000/names"
+    let namePostContent = JSON.stringify({
+        firstName: faker.name.firstName(),
+        middleName: faker.name.middleName(),
+        lastName: faker.name.lastName(),
+        jobTitle: faker.name.jobTitle(),
+        gender: faker.name.gender(),
+        prefix: faker.name.prefix(),
+        suffix: faker.name.suffix(),
+        title: faker.name.title(),
+        jobDescriptor: faker.name.jobDescriptor(),
+        jobArea: faker.name.jobArea(),
+        jobType: faker.name.jobType(),
+    })
+    let parameters = {
+        headers: {
+            "Content-type": "application/json"
+        }
     }
-}
 
+    let response = http.post(piAddress, namePostContent, parameters)
+    check(response, { 'status was 201': (r) => r.status == 201 })
+    sleep(52)
+}

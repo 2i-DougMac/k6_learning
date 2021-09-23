@@ -1,0 +1,46 @@
+{
+  "names": [
+    {
+      "id": 1,
+      "firstName": "Doug",
+      "middleName": "S",
+      "lastName": "Mac",
+      "jobTitle": "tester",
+      "gender": "male",
+      "prefix": "prefix",
+      "suffix": "esquire",
+      "title": "Mister",
+      "jobDescriptor": "engineer",
+      "jobArea": "engineering",
+      "jobType": "testing"    
+    }
+  ],
+  "addresses": [
+    {
+      "id": 1,
+      "zipCode": "example",
+      "zipCodeByState": "example",
+      "city": "example",
+      "cityPrefix": "example",
+      "citySuffix": "example",
+      "cityName": "example",
+      "streetName": "example",
+      "streetAddress": "example",
+      "streetSuffix": "example",
+      "streetPrefix": "example",
+      "secondaryAddress": "example",
+      "county": "example",
+      "country": "example",
+      "countryCode": "example",
+      "state": "example",
+      "stateAbbr": "example",
+      "latitude": "example",
+      "longitude": "example",
+      "direction": "example",
+      "cardinalDirection": "example",
+      "ordinalDirection": "example",
+      "nearbyGPSCoordinate": "example",
+      "timeZone": "example"
+    }
+  ]
+}
