@@ -1,29 +1,33 @@
 import http from 'k6/http'
 import { check, sleep } from 'k6'
-import faker from 'faker'
-faker.locale = "en"
 
 export let options = {
-  stages: [
-
-    { duration: '60m', target: 200 }
-  ],
+    // stages: [
+    //     { duration: '1m', target: 1 },
+    //     { duration: '2m', target: 1 },
+    //     { duration: '1m', target: 0 }
+    // ],
+    vus: 1,
+    duration: "1m",
+    executor: "constant-vus",
+    minIterationDuration: "2s"
 }
+
 
 export default function () {
     let piAddress = "http://192.168.178.64:3000/names"
     let namePostContent = JSON.stringify({
-        firstName: faker.name.firstName(),
-        middleName: faker.name.middleName(),
-        lastName: faker.name.lastName(),
-        jobTitle: faker.name.jobTitle(),
-        gender: faker.name.gender(),
-        prefix: faker.name.prefix(),
-        suffix: faker.name.suffix(),
-        title: faker.name.title(),
-        jobDescriptor: faker.name.jobDescriptor(),
-        jobArea: faker.name.jobArea(),
-        jobType: faker.name.jobType(),
+        firstName: "Douglas",
+        middleName: "Stuart",
+        lastName: "MacIntyre",
+        jobTitle: "Tester",
+        gender: "Male",
+        prefix: "",
+        suffix: "Esq",
+        title: "Mr.",
+        jobDescriptor: "Test man",
+        jobArea: "Software",
+        jobType: "Full-time"
     })
     let parameters = {
         headers: {
@@ -31,7 +35,42 @@ export default function () {
         }
     }
 
-    let response = http.post(piAddress, namePostContent, parameters)
-    check(response, { 'status was 201': (r) => r.status == 201 })
-    sleep(52)
+    let endpoint = Math.floor(Math.random() * 9)
+
+    switch (true) {
+        case (endpoint === 1):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 2):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 3):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 4):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 5):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 6):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 7):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 8):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 9):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        case (endpoint === 0):
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+        default:
+            console.log("default: ", endpoint)
+            check(http.post(piAddress, namePostContent, parameters), { 'status was 201': (r) => r.status == 201 })
+            break
+    }
 }
