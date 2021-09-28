@@ -6,9 +6,9 @@ import runSoakTest from "./tests/k6_hci_soak_test.js"
 
 export default function() {
     runStressTest()
-    sleep(600)
+    sleep(1800)
     runLoadTest()
-    sleep(600)
+    sleep(1800)
     runSoakTest()
     sleep(120)
 };

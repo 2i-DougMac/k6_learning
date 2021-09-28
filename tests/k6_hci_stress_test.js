@@ -4,13 +4,13 @@ import { check, sleep } from 'k6'
 
 export let options = {
     //
-    //  Load test
+    //  Load Test 1
     //  Run 1 virtual user that, every 2 seconds over a period of 1 hour, hits a single endpoint from those available.
     //
-        vus: 1,
-        duration: "60m",
+        vus: 50,
+        duration: "60s",
         executor: "constant-vus",
-        minIterationDuration: "2s"
+    //
 }
 
 
